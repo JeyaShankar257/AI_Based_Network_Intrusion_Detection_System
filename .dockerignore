@@ -1,0 +1,30 @@
+
+# Python virtual environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Git
+.git/
+.gitignore
+
+# Original and processed datasets
+Dataset/
+dataset_processed/
+
+# Machine learning model artifacts
+models/*.joblib
+
+# Notebooks and reports
+notebooks/
+reports/
+
+# Environment and temporary files
+.env
+*.log
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/

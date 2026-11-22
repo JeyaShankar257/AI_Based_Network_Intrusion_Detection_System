@@ -11,6 +11,7 @@ Network security is an important concern because malicious network activities ca
 This project aims to build a machine learning-based intrusion detection system that identifies potentially malicious network traffic based on network flow features.
 
 The system provides:
+
 - Network traffic classification as Normal or Attack.
 - Attack probability estimation.
 - A trained Random Forest classification pipeline.
@@ -20,25 +21,26 @@ The system provides:
 
 ## Technologies Used
 
-| Category | Technology |
-|---|---|
-| Programming Language | Python |
-| Data Processing | Pandas, NumPy |
-| Data Visualization | Matplotlib, Seaborn |
-| Machine Learning | Scikit-learn |
-| ML Algorithm | Random Forest Classifier |
-| Model Serialization | Joblib |
-| Backend | FastAPI |
-| API Server | Uvicorn |
-| Frontend | Streamlit |
-| Dependency Management | uv |
-| Dataset | UNSW-NB15 |
+| Category              | Technology               |
+| --------------------- | ------------------------ |
+| Programming Language  | Python                   |
+| Data Processing       | Pandas, NumPy            |
+| Data Visualization    | Matplotlib, Seaborn      |
+| Machine Learning      | Scikit-learn             |
+| ML Algorithm          | Random Forest Classifier |
+| Model Serialization   | Joblib                   |
+| Backend               | FastAPI                  |
+| API Server            | Uvicorn                  |
+| Frontend              | Streamlit                |
+| Dependency Management | uv                       |
+| Dataset               | UNSW-NB15                |
 
 ## Dataset
 
 This project uses the **UNSW-NB15 dataset**, a network intrusion detection dataset containing normal network traffic and different categories of attack traffic.
 
 The dataset includes network flow features such as:
+
 - Protocol information
 - Network service
 - Connection state
@@ -70,9 +72,9 @@ The preprocessing script uses these two files.
 The target variable is `label`:
 
 | Label | Classification |
-|---|---|
-| 0 | Normal |
-| 1 | Attack |
+| ----- | -------------- |
+| 0     | Normal         |
+| 1     | Attack         |
 
 The `attack_cat` and `id` columns are excluded from model training.
 
@@ -159,21 +161,22 @@ The project uses a **Random Forest Classifier**.
 
 ### Model Configuration
 
-| Parameter | Value |
-|---|---|
-| Algorithm | Random Forest |
-| Number of Estimators | 200 |
-| Random State | 42 |
-| Class Weight | balanced |
-| Numerical Imputation | Median |
-| Categorical Imputation | Most Frequent |
-| Categorical Encoding | OneHotEncoder |
-| Unknown Categories | ignore |
-| Classification Threshold | 0.50 |
+| Parameter                | Value         |
+| ------------------------ | ------------- |
+| Algorithm                | Random Forest |
+| Number of Estimators     | 200           |
+| Random State             | 42            |
+| Class Weight             | balanced      |
+| Numerical Imputation     | Median        |
+| Categorical Imputation   | Most Frequent |
+| Categorical Encoding     | OneHotEncoder |
+| Unknown Categories       | ignore        |
+| Classification Threshold | 0.50          |
 
 ### Preprocessing Pipeline
 
 The preprocessing pipeline uses:
+
 - **Numerical features:** Median imputation.
 - **Categorical features:** Most frequent value imputation followed by OneHotEncoder.
 - **Unknown categories:** Ignored during transformation to support unseen categorical values.
@@ -183,6 +186,7 @@ The preprocessing and classification steps are combined into a Scikit-learn pipe
 ### Input Features
 
 The model uses 42 input features:
+
 - 39 numerical features.
 - 3 categorical features: `proto`, `service`, and `state`.
 
@@ -194,22 +198,22 @@ The final model was evaluated using the official UNSW-NB15 testing dataset with 
 
 ### Performance Metrics
 
-| Metric | Score |
-|---|---:|
-| Accuracy | 90.30% |
+| Metric    |  Score |
+| --------- | -----: |
+| Accuracy  | 90.30% |
 | Precision | 98.80% |
-| Recall | 86.81% |
-| F1 Score | 92.42% |
-| ROC-AUC | 0.9827 |
+| Recall    | 86.81% |
+| F1 Score  | 92.42% |
+| ROC-AUC   | 0.9827 |
 
 ### Confusion Matrix
 
 The confusion matrix at threshold 0.50:
 
-| | Predicted Normal | Predicted Attack |
-|---|---:|---:|
-| Actual Normal | 55,441 | 559 |
-| Actual Attack | 15,461 | 103,880 |
+|               | Predicted Normal | Predicted Attack |
+| ------------- | ---------------: | ---------------: |
+| Actual Normal |           55,441 |              559 |
+| Actual Attack |           15,461 |          103,880 |
 
 **Note:** These results are from the official test dataset. Performance on other network traffic may differ.
 
@@ -223,10 +227,10 @@ The confusion matrix at threshold 0.50:
 
 ### 1. Clone the Repository
 
-Replace `YOUR_USERNAME` with your GitHub username.
+Replace `JeyaShankar257` with your GitHub username.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AI_Based_Network_Intrusion_Detection_System.git
+git clone https://github.com/JeyaShankar257/AI_Based_Network_Intrusion_Detection_System.git
 ```
 
 ```bash
@@ -323,11 +327,11 @@ http://localhost:8501
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/` | API welcome message |
-| GET | `/health` | Check API and model status |
-| POST | `/predict` | Predict network traffic classification |
+| Method | Endpoint   | Description                            |
+| ------ | ---------- | -------------------------------------- |
+| GET    | `/`        | API welcome message                    |
+| GET    | `/health`  | Check API and model status             |
+| POST   | `/predict` | Predict network traffic classification |
 
 ### Sample Prediction Response
 
@@ -350,22 +354,26 @@ Refer to the Swagger documentation at `/docs` for the request schema and interac
 The Streamlit application provides four main sections:
 
 ### 1. Dashboard Overview
+
 - API and model status.
 - Prediction summary.
 - Traffic classification statistics.
 - Prediction visualizations.
 
 ### 2. Traffic Analysis
+
 - Analyze network traffic records.
 - Submit traffic features for prediction.
 - View classification and attack probability.
 
 ### 3. Prediction History
+
 - View previous predictions.
 - Analyze prediction history.
 - Export prediction records as CSV.
 
 ### 4. Model Information
+
 - View model configuration.
 - Review model evaluation metrics.
 - Understand the classification approach.

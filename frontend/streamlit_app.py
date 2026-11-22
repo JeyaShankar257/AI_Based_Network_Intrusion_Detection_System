@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+import os
 
 # ==========================================
 # PAGE CONFIGURATION
@@ -12,8 +13,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
-
-API_URL = "http://127.0.0.1:8000"
+# for normal use
+# API_URL = "http://127.0.0.1:8000"
+# for docker use
+API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
 
 # ==========================================
 # CUSTOM CSS

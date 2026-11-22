@@ -1,0 +1,48 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+
+    image: intrusion_backend:v1
+
+    container_name: intrusion-backend
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./models:/app/models:ro
+
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+
+    image: intrusion_frontend:v1
+
+    container_name: intrusion-frontend
+
+    ports:
+      - "8501:8501"
+
+    environment:
+      API_URL: http://backend:8000
+
+    volumes:
+      - ./dataset_processed:/app/dataset_processed:ro
+
+    depends_on:
+      backend:
+        condition: service_healthy

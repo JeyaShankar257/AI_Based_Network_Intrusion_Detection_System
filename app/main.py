@@ -170,7 +170,7 @@ def predict_traffic(payload: dict[str, Any]):
 
         try:
             input_df[feature] = pd.to_numeric(input_df[feature], errors="raise")
-        except ValueError, TypeError:
+        except (ValueError, TypeError):
             raise HTTPException(
                 status_code=422,
                 detail=f"Feature '{feature}' must contain a numeric value.",

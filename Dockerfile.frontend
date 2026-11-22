@@ -1,0 +1,24 @@
+
+# Use Python 3.14 slim image
+FROM python:3.14-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install uv package manager
+RUN pip install --no-cache-dir uv
+
+# Copy dependency configuration
+COPY pyproject.toml uv.lock ./
+
+# Install project dependencies
+RUN uv sync --frozen --no-dev --no-install-project
+
+# Copy Streamlit application
+COPY frontend/ ./frontend/
+
+# Expose Streamlit port
+EXPOSE 8501
+
+# Start Streamlit application
+CMD [".venv/bin/streamlit", "run", "frontend/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
